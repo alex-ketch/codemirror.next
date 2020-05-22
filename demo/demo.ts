@@ -25,14 +25,14 @@ import {linter, openLintPanel} from "@codemirror/next/lint"
 //import {StreamSyntax} from "@codemirror/next/stream-syntax"
 //import legacyJS from "@codemirror/next/legacy-modes/src/javascript"
 
+const lineCount = 200
+let text = `// Total number of lines: ${lineCount} \n`
+for (let count = 2; count <= lineCount; count++) {
+  text += `line number ${count}\n`
+}
+
 let isMac = /Mac/.test(navigator.platform)
-let state = EditorState.create({doc: `<script>
-  const {readFile} = require("fs");
-  readFile("package.json", "utf8", (err, data) => {
-    console.log(data);
-  });
-</script>
-`, extensions: [
+let state = EditorState.create({doc: text, extensions: [
   lineNumbers(),
   specialChars(),
   history(),
